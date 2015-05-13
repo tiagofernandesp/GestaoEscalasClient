@@ -1,13 +1,18 @@
-﻿var app = angular.module('escalasApp', ['ngRoute']);
+﻿'use strict';
 
-app.config(['$routeProvider', function ($routeProvider) {
+angular.module('App', [
+	'ngRoute',
+	'escalasModule',
+	'ngResource'
+])
+.config(function ($routeProvider) {
     $routeProvider
         .when('/escalas',
             {
-                controller: 'EscalasController',
-                templateUrl: 'app/views/panelEscalas.html'
+                templateUrl: 'app/views/teste.html',
+                controller: 'ListServicosController'
             })
         .otherwise({ redirectTo: '/escalas' });
-}]);
+});
 
 

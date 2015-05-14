@@ -3,7 +3,7 @@
 angular.module('App', [
 	'ngRoute',
 	'escalasModule',
-	'ngResource'
+	'servicosFactory'
 ])
 .config(function ($routeProvider) {
     $routeProvider

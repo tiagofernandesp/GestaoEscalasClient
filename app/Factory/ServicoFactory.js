@@ -1,12 +1,19 @@
 'use strict';
 
 var myFactory = angular.module('servicosFactory', []);
-myFactory.factory('Servicos', function($resource){
-    var data = $resource('http://localhost:8080/gestao.escalas-0.0.1-SNAPSHOT/servico/:id', {id: '@id'},
-        {getAll:{
-            method :'GET'
-        }
-        });
-return data;
-});
+myFactory.factory('dataFactory', ['$http', function($http)
+    {
+        var urlBase='http://localhost:8080/gestao.escalas-0.0.1-SNAPSHOT/';
+        var urlFinal='http://localhost:8080/gestao.escalas-0.0.1-SNAPSHOT/tiposervico';
+        var dataFactory={};
+        var request = { method: 'GET', url: urlFinal };
+
+        dataFactory.getRoles=function()
+        {
+            return $http.get(urlFinal);
+            //return 'Ola getRoles';
+        };
+
+        return dataFactory;
+    }]);
 

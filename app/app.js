@@ -9,7 +9,8 @@ angular.module('App', [
     $routeProvider
         .when('/escalas',
             {
-                templateUrl: 'app/views/teste.html',
+                //templateUrl: 'app/views/teste.html',
+                templateUrl: 'app/views/panelEscalas.html',
                 controller: 'ListServicosController'
             })
         .otherwise({ redirectTo: '/escalas' });

@@ -3,10 +3,10 @@
         <div class="large-11 medium-13 small-13 columns">
             <div class="large-3 medium-3 small-4 columns">
                 <div class="large-10  medium-10 small-10 columns">
-                    <input type="text" class="date-second-navbar" value="03/05/2015" id="dp3">
+                    <input type="text" class="date-second-navbar" id="dp3">
                 </div>
                 <div class="large-4  medium-4 small-4 columns nextPrev">
-                    <a href="#contact">
+                    <a ng-click="changeDate(-1)">
                         <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
                     </a>
                 </div>
@@ -14,57 +14,57 @@
             <ul class="large-11 medium-11 small-10 columns nav-day">
                 <li class="large-2 medium-2 small-4 columns day">
                     <a href="#contact">
-                        <div class ="but-number-day"><p class="number-day">16</p></div>
-                        <div class ="but-name-day"><p class="name-day">Segunda</p></div>
+                        <div class ="but-number-day"><p class="number-day">{{dias[0].data | date:'dd'}}</p></div>
+                        <div class ="but-name-day"><p class="name-day">{{formatDateName(dias[0].data)}}</p></div>
                     </a>
                 </li>
 
                 <li class="large-2 medium-2 small-4 columns day">
                     <a href="#contact">
-                        <div class ="but-number-day"><p class="number-day">17</p></div>
-                        <div class ="but-name-day"><p class="name-day">Ter�a</p></div>
+                        <div class ="but-number-day"><p class="number-day">{{dias[1].data | date:'dd'}}</p></div>
+                        <div class ="but-name-day"><p class="name-day">{{formatDateName(dias[1].data)}}</p></div>
                     </a>
                 </li>
                 <li class="large-2 medium-2 small-3 columns day">
                     <a href="#contact">
-                        <div class ="but-number-day"><p class="number-day">18</p></div>
-                        <div class ="but-name-day"><p class="name-day">Quarta</p></div>
+                        <div class ="but-number-day"><p class="number-day">{{dias[2].data | date:'dd'}}</p></div>
+                        <div class ="but-name-day"><p class="name-day">{{formatDateName(dias[2].data)}}</p></div>
                     </a>
                 </li>
                 <li class="large-2 medium-2 small-3 columns day">
                     <a href="#contact">
-                        <div class ="but-number-day"><p class="number-day">19</p></div>
-                        <div class ="but-name-day"><p class="name-day">Quinta</p></div>
+                        <div class ="but-number-day"><p class="number-day">{{dias[3].data | date:'dd'}}</p></div>
+                        <div class ="but-name-day"><p class="name-day">{{formatDateName(dias[3].data)}}</p></div>
                     </a>
                 </li>
                 <li class="large-2 medium-2 hide-for-small-down columns day">
                     <a href="#contact">
-                        <div class ="but-number-day"><p class="number-day">20</p></div>
-                        <div class ="but-name-day"><p class="name-day">Sexta</p></div>
+                        <div class ="but-number-day"><p class="number-day">{{dias[4].data | date:'dd'}}</p></div>
+                        <div class ="but-name-day"><p class="name-day">{{formatDateName(dias[4].data)}}</p></div>
                     </a>
                 </li>
                 <li class="large-2 medium-2 hide-for-small-down columns day">
                     <a href="#contact">
-                        <div class ="but-number-day"><p class="number-day">21</p></div>
-                        <div class ="but-name-day"><p class="name-day">Sabado</p></div>
+                        <div class ="but-number-day"><p class="number-day">{{dias[5].data | date:'dd'}}</p></div>
+                        <div class ="but-name-day"><p class="name-day">{{formatDateName(dias[5].data)}}</p></div>
                     </a>
                 </li>
                 <li class="large-2 medium-2 hide-for-small-down columns day">
                     <a href="#contact">
-                        <div class ="but-number-day"><p class="number-day">22</p></div>
-                        <div class ="but-name-day"><p class="name-day">Domingo</p></div>
+                        <div class ="but-number-day"><p class="number-day">{{dias[6].data | date:'dd'}}</p></div>
+                        <div class ="but-name-day"><p class="name-day">{{formatDateName(dias[6].data)}}</p></div>
                     </a>
                 </li>
             </ul>
         </div>
         <div class="large-3 medium-1 small-1 columns next-search">
             <div class="large-3 medium-14 small-14 columns nextPrev">
-                <a href="#contact"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
+                <a ng-click="changeDate(1)"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
             </div>
             <div class="large-11 hide-for-medium-down columns search">
                 <form class="form-search">
                     <div class="input-append">
-                        <input type="text" class="span2 search-query">
+                        <input type="text" class="span2 search-query" ng-model="searchText">
                         <div class="search-icon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
                     </div>
                 </form>
@@ -76,51 +76,51 @@
 <div class="body-background">
     <div class="row">
         <div class="large-11 medium-13 small-13 columns container-table">
-            <div class="small-14 columns person">
+            <div class="small-14 columns person" ng-repeat="servico in dataa | filter:searchText">
                 <div class="large-3 medium-3 small-4 columns name">
                     <div class="large-10  medium-14 small-14 columns apelido">
-                        <p class="p-apelido">Fernandesasdasdasdasdss</p>
+                        <p class="p-apelido">{{servico.pessoa.apelido}}</p>
                     </div>
                     <div class="large-4 hide-for-medium-down columns numero">
-                        <p class="p-numero">Tiago</p>
-                        <p class="p-numero">8840</p>
+                        <p class="p-numero">{{servico.pessoa.pNome}}</p>
+                        <p class="p-numero">{{servico.pessoa.numeroGNR}}</p>
                     </div>
                 </div>
                 <div class="large-11 medium-11 small-10 columns">
                     <div class="large-2 medium-2 small-4 columns day"><a href="#contact">
-                        <div class="but-name"><p class="name">POBA</p></div>
-                        <div class="but-time"><p class="time">15:00</p></div>
-                        <div class="but-time"><p class="time">15:00</p></div>
+                        <div class="but-name"><p class="name">{{servico.escalas[0].servico.tipoServico.nome}}</p></div>
+                        <div class="but-time"><p class="time">{{servico.escalas[0].servico.horaInicio}}</p></div>
+                        <div class="but-time"><p class="time">{{servico.escalas[0].servico.horaFim}}</p></div>
                     </a></div>
                     <div class="large-2 medium-2 small-4 columns day"><a href="#contact">
-                        <div class="but-name"><p class="name">PO1</p></div>
-                        <div class="but-time"><p class="time">15:00</p></div>
-                        <div class="but-time"><p class="time">15:00</p></div>
+                        <div class="but-name"><p class="name">{{servico.escalas[1].servico.tipoServico.nome}}</p></div>
+                        <div class="but-time"><p class="time">{{servico.escalas[1].servico.horaInicio}}</p></div>
+                        <div class="but-time"><p class="time">{{servico.escalas[1].servico.horaFim}}</p></div>
                     </a></div>
                     <div class="large-2 medium-2 small-3 columns day"><a href="#contact">
-                        <div class="but-name"><p class="name">PO1</p></div>
-                        <div class="but-time"><p class="time">15:00</p></div>
-                        <div class="but-time"><p class="time">15:00</p></div>
+                        <div class="but-name"><p class="name">{{servico.escalas[2].servico.tipoServico.nome}}</p></div>
+                        <div class="but-time"><p class="time">{{servico.escalas[2].servico.horaInicio}}</p></div>
+                        <div class="but-time"><p class="time">{{servico.escalas[2].servico.horaFim}}</p></div>
                     </a></div>
                     <div class="large-2 medium-2 small-3 columns day"><a href="#contact">
-                        <div class="but-name"><p class="name">PO1</p></div>
-                        <div class="but-time"><p class="time">15:00</p></div>
-                        <div class="but-time"><p class="time">15:00</p></div>
+                        <div class="but-name"><p class="name">{{servico.escalas[3].servico.tipoServico.nome}}</p></div>
+                        <div class="but-time"><p class="time">{{servico.escalas[3].servico.horaInicio}}</p></div>
+                        <div class="but-time"><p class="time">{{servico.escalas[3].servico.horaFim}}</p></div>
                     </a></div>
                     <div class="large-2 medium-2 hide-for-small-down columns day"><a href="#contact">
-                        <div class="but-name"><p class="name">PO1</p></div>
-                        <div class="but-time"><p class="time">15:00</p></div>
-                        <div class="but-time"><p class="time">15:00</p></div>
+                        <div class="but-name"><p class="name">{{servico.escalas[4].servico.tipoServico.nome}}</p></div>
+                        <div class="but-time"><p class="time">{{servico.escalas[4].servico.horaInicio}}</p></div>
+                        <div class="but-time"><p class="time">{{servico.escalas[4].servico.horaFim}}</p></div>
                     </a></div>
                     <div class="large-2 medium-2 hide-for-small-down columns day"><a href="#contact">
-                        <div class="but-name"><p class="name">PO1</p></div>
-                        <div class="but-time"><p class="time">15:00</p></div>
-                        <div class="but-time"><p class="time">15:00</p></div>
+                        <div class="but-name"><p class="name">{{servico.escalas[5].servico.tipoServico.nome}}</p></div>
+                        <div class="but-time"><p class="time">{{servico.escalas[5].servico.horaInicio}}</p></div>
+                        <div class="but-time"><p class="time">{{servico.escalas[5].servico.horaFim}}</p></div>
                     </a></div>
                     <div class="large-2 medium-2 hide-for-small-down columns day"><a href="#contact">
-                        <div class="but-name"><p class="name">PO1</p></div>
-                        <div class="but-time"><p class="time">15:00</p></div>
-                        <div class="but-time"><p class="time">15:00</p></div>
+                        <div class="but-name"><p class="name">{{servico.escalas[6].servico.tipoServico.nome}}</p></div>
+                        <div class="but-time"><p class="time">{{servico.escalas[6].servico.horaInicio}}</p></div>
+                        <div class="but-time"><p class="time">{{servico.escalas[6].servico.horaFim}}</p></div>
                     </a></div>
                 </div>
             </div>
@@ -189,6 +189,19 @@
                 </div>
             </div>
         </div>
-        
     </div>
 </div>
+<script>
+    $('#dp3').datepicker({
+        format: "yyyy-mm-dd",
+        autoclose: true,
+        language: "pt"
+    });
+    $('#dp3').datepicker('setDate', new Date());
+    $('#dp2').datepicker({
+        format: "yyyy-mm-dd",
+        autoclose: true,
+        language: "pt"
+    });
+    $("#dp2").datepicker('setDate', new Date());
+</script>

@@ -5,25 +5,27 @@ var myApp = angular.module('escalasModule',[]);
 
 myApp.controller('ListServicosController',['$scope','$http','$rootScope','dataFactory', function($scope,$http,$rootScope,dataFactory) {
 
-	var chooseDate = new Date();
-	$scope.chooseDate = chooseDate;
+	
+	/*
+	* Tabela
+	*/
+	var today = new Date();
+	$scope.chooseDate = today;
 
-
-	var addDays = function( days , chooseDate)
+	var addDays = function( days)
 	{
 
-		var dat = new Date(chooseDate.valueOf());
+		var dat = new Date($scope.chooseDate.valueOf());
 		dat.setDate(dat.getDate() + days);
 		return dat;
 	}
 
-
-	var show = 7;
-	$scope.dias = Array();
-	for(var i = 0; i< show; i++) {
-		$scope.dias.push({data: addDays(i, chooseDate)});
+	function initializeArrayDays(date){var show = 7;
+		$scope.dias = Array();
+		for(var i = 0; i< show; i++) {
+			$scope.dias.push({data: addDays(i, date)});
+		}
 	}
-
 
 	var formatDate = function(dat)
 	{
@@ -47,13 +49,12 @@ myApp.controller('ListServicosController',['$scope','$http','$rootScope','dataFa
 	function getServiceEscalas(dat){
 		dataFactory.getEscalas(formatDate(dat))
 		.success(function (data, status) {
-			$scope.dataa = data;
+			$scope.dataListaEscalas = data;
 		})
 		.error(function (data, status) {
 			alert("Erro aceder Web Service: " + urlFinal + "Status: "+ status);
 		});
 	}
-
 	$scope.changeDate= function(days)
 	{
 		var size = $scope.dias.length;
@@ -66,6 +67,15 @@ myApp.controller('ListServicosController',['$scope','$http','$rootScope','dataFa
 			$scope.dias.shift();
 		}
 		getServiceEscalas($scope.chooseDate);
+		getTabelaPrioridade();
+	}
+	$scope.changeWithDate= function(dt)
+	{
+		var size = $scope.dias.length;
+		$scope.chooseDate = dt;
+		initializeArrayDays(dt);
+		getServiceEscalas($scope.chooseDate);
+		getTabelaPrioridade();
 	}
 
 	$scope.formatDateName = function(dat)
@@ -80,6 +90,43 @@ myApp.controller('ListServicosController',['$scope','$http','$rootScope','dataFa
 		weekday[6] = "Sábado";
 		return weekday[dat.getDay()];
 	}
-	//inicializa lista
-	getServiceEscalas(chooseDate);
+
+	getServiceEscalas($scope.chooseDate);
+	initializeArrayDays($scope.chooseDate);
+	/*
+	* Lista Proridades
+	*/
+	$scope.tipoServicoId="";
+	$scope.dataTabelaPrioridade ="";
+	$scope.dataTipoServicos="";
+
+	$scope.updateTipoServico = function (){
+		getTabelaPrioridade();
+	}
+	function getServiceTipoServicos(){
+		dataFactory.getTipoServicos()
+		.success(function (data, status) {
+			$scope.dataTipoServicos = data;
+			if($scope.dataTipoServicos!="" && $scope.tipoServicoId==""){
+				$scope.tipoServicoId = $scope.dataTipoServicos[0].id;
+				getTabelaPrioridade();
+			}
+		})
+		.error(function (data, status) {
+			alert("Erro aceder Web Service: " + urlFinal + "Status: "+ status);
+		});
+	}
+	getServiceTipoServicos();
+
+	function getTabelaPrioridade(){
+		dataFactory.getTabelaPrioridade(formatDate($scope.chooseDate),$scope.tipoServicoId)
+		.success(function (data, status) {
+			$scope.dataTabelaPrioridade = data;
+		})
+		.error(function (data, status) {
+			alert("Erro aceder Web Service: " + urlFinal + "Status: "+ status);
+		});
+	}
+
+	
 }]);

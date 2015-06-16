@@ -3,80 +3,84 @@
         <div class="large-11 medium-13 small-13 columns">
             <div class="large-3 medium-3 small-4 columns">
                 <div class="large-10  medium-10 small-10 columns">
-                    <input type="text" class="date-second-navbar" id="dp3">
-                </div>
-                <div class="large-4  medium-4 small-4 columns nextPrev">
-                    <a ng-click="changeDate(-1)">
-                        <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-                    </a>
-                </div>
-            </div>
-            <ul class="large-11 medium-11 small-10 columns nav-day">
-                <li class="large-2 medium-2 small-4 columns day">
-                    <a href="#contact">
-                        <div class ="but-number-day"><p class="number-day">{{dias[0].data | date:'dd'}}</p></div>
-                        <div class ="but-name-day"><p class="name-day">{{formatDateName(dias[0].data)}}</p></div>
-                    </a>
-                </li>
 
-                <li class="large-2 medium-2 small-4 columns day">
-                    <a href="#contact">
-                        <div class ="but-number-day"><p class="number-day">{{dias[1].data | date:'dd'}}</p></div>
-                        <div class ="but-name-day"><p class="name-day">{{formatDateName(dias[1].data)}}</p></div>
-                    </a>
-                </li>
-                <li class="large-2 medium-2 small-3 columns day">
-                    <a href="#contact">
-                        <div class ="but-number-day"><p class="number-day">{{dias[2].data | date:'dd'}}</p></div>
-                        <div class ="but-name-day"><p class="name-day">{{formatDateName(dias[2].data)}}</p></div>
-                    </a>
-                </li>
-                <li class="large-2 medium-2 small-3 columns day">
-                    <a href="#contact">
-                        <div class ="but-number-day"><p class="number-day">{{dias[3].data | date:'dd'}}</p></div>
-                        <div class ="but-name-day"><p class="name-day">{{formatDateName(dias[3].data)}}</p></div>
-                    </a>
-                </li>
-                <li class="large-2 medium-2 hide-for-small-down columns day">
-                    <a href="#contact">
-                        <div class ="but-number-day"><p class="number-day">{{dias[4].data | date:'dd'}}</p></div>
-                        <div class ="but-name-day"><p class="name-day">{{formatDateName(dias[4].data)}}</p></div>
-                    </a>
-                </li>
-                <li class="large-2 medium-2 hide-for-small-down columns day">
-                    <a href="#contact">
-                        <div class ="but-number-day"><p class="number-day">{{dias[5].data | date:'dd'}}</p></div>
-                        <div class ="but-name-day"><p class="name-day">{{formatDateName(dias[5].data)}}</p></div>
-                    </a>
-                </li>
-                <li class="large-2 medium-2 hide-for-small-down columns day">
-                    <a href="#contact">
-                        <div class ="but-number-day"><p class="number-day">{{dias[6].data | date:'dd'}}</p></div>
-                        <div class ="but-name-day"><p class="name-day">{{formatDateName(dias[6].data)}}</p></div>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="large-3 medium-1 small-1 columns next-search">
-            <div class="large-3 medium-14 small-14 columns nextPrev">
-                <a ng-click="changeDate(1)"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
-            </div>
-            <div class="large-11 hide-for-medium-down columns search">
-                <form class="form-search">
-                    <div class="input-append">
-                        <input type="text" class="span2 search-query" ng-model="searchText">
-                        <div class="search-icon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
-                    </div>
-                </form>
+                    <p class="input-group">
+                      <input type="date" class="date-second-navbar" datepicker-popup ng-model="chooseDate" ng-change="changeWithDate(chooseDate)" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                  </p>
+                  <!--<input type="text" class="date-second-navbar" id="dp3">-->
+              </div>
+              <div class="large-4  medium-4 small-4 columns nextPrev">
+                <a ng-click="changeDate(-1)">
+                    <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                </a>
             </div>
         </div>
-    </nav>
+        <ul class="large-11 medium-11 small-10 columns nav-day">
+            <li class="large-2 medium-2 small-4 columns day">
+                <a href="#contact">
+                    <div class ="but-number-day"><p class="number-day">{{dias[0].data | date:'dd'}}</p></div>
+                    <div class ="but-name-day"><p class="name-day">{{formatDateName(dias[0].data)}}</p></div>
+                </a>
+            </li>
+
+            <li class="large-2 medium-2 small-4 columns day">
+                <a href="#contact">
+                    <div class ="but-number-day"><p class="number-day">{{dias[1].data | date:'dd'}}</p></div>
+                    <div class ="but-name-day"><p class="name-day">{{formatDateName(dias[1].data)}}</p></div>
+                </a>
+            </li>
+            <li class="large-2 medium-2 small-3 columns day">
+                <a href="#contact">
+                    <div class ="but-number-day"><p class="number-day">{{dias[2].data | date:'dd'}}</p></div>
+                    <div class ="but-name-day"><p class="name-day">{{formatDateName(dias[2].data)}}</p></div>
+                </a>
+            </li>
+            <li class="large-2 medium-2 small-3 columns day">
+                <a href="#contact">
+                    <div class ="but-number-day"><p class="number-day">{{dias[3].data | date:'dd'}}</p></div>
+                    <div class ="but-name-day"><p class="name-day">{{formatDateName(dias[3].data)}}</p></div>
+                </a>
+            </li>
+            <li class="large-2 medium-2 hide-for-small-down columns day">
+                <a href="#contact">
+                    <div class ="but-number-day"><p class="number-day">{{dias[4].data | date:'dd'}}</p></div>
+                    <div class ="but-name-day"><p class="name-day">{{formatDateName(dias[4].data)}}</p></div>
+                </a>
+            </li>
+            <li class="large-2 medium-2 hide-for-small-down columns day">
+                <a href="#contact">
+                    <div class ="but-number-day"><p class="number-day">{{dias[5].data | date:'dd'}}</p></div>
+                    <div class ="but-name-day"><p class="name-day">{{formatDateName(dias[5].data)}}</p></div>
+                </a>
+            </li>
+            <li class="large-2 medium-2 hide-for-small-down columns day">
+                <a href="#contact">
+                    <div class ="but-number-day"><p class="number-day">{{dias[6].data | date:'dd'}}</p></div>
+                    <div class ="but-name-day"><p class="name-day">{{formatDateName(dias[6].data)}}</p></div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="large-3 medium-1 small-1 columns next-search">
+        <div class="large-3 medium-14 small-14 columns nextPrev">
+            <a ng-click="changeDate(1)"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
+        </div>
+        <div class="large-11 hide-for-medium-down columns search">
+            <form class="form-search">
+                <div class="input-append">
+                    <input type="text" class="span2 search-query" ng-model="searchText">
+                    <div class="search-icon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</nav>
 </div>
 
 <div class="body-background">
     <div class="row">
         <div class="large-11 medium-13 small-13 columns container-table">
-            <div class="small-14 columns person" ng-repeat="servico in dataa | filter:searchText">
+            <div class="small-14 columns person" ng-repeat="servico in dataListaEscalas | filter:searchText">
                 <div class="large-3 medium-3 small-4 columns name">
                     <div class="large-10  medium-14 small-14 columns apelido">
                         <p class="p-apelido">{{servico.pessoa.apelido}}</p>
@@ -87,121 +91,107 @@
                     </div>
                 </div>
                 <div class="large-11 medium-11 small-10 columns">
-                    <div class="large-2 medium-2 small-4 columns day"><a href="#contact">
-                        <div class="but-name"><p class="name">{{servico.escalas[0].servico.tipoServico.nome}}</p></div>
-                        <div class="but-time"><p class="time">{{servico.escalas[0].servico.horaInicio}}</p></div>
-                        <div class="but-time"><p class="time">{{servico.escalas[0].servico.horaFim}}</p></div>
-                    </a></div>
-                    <div class="large-2 medium-2 small-4 columns day"><a href="#contact">
-                        <div class="but-name"><p class="name">{{servico.escalas[1].servico.tipoServico.nome}}</p></div>
-                        <div class="but-time"><p class="time">{{servico.escalas[1].servico.horaInicio}}</p></div>
-                        <div class="but-time"><p class="time">{{servico.escalas[1].servico.horaFim}}</p></div>
-                    </a></div>
-                    <div class="large-2 medium-2 small-3 columns day"><a href="#contact">
-                        <div class="but-name"><p class="name">{{servico.escalas[2].servico.tipoServico.nome}}</p></div>
-                        <div class="but-time"><p class="time">{{servico.escalas[2].servico.horaInicio}}</p></div>
-                        <div class="but-time"><p class="time">{{servico.escalas[2].servico.horaFim}}</p></div>
-                    </a></div>
-                    <div class="large-2 medium-2 small-3 columns day"><a href="#contact">
-                        <div class="but-name"><p class="name">{{servico.escalas[3].servico.tipoServico.nome}}</p></div>
-                        <div class="but-time"><p class="time">{{servico.escalas[3].servico.horaInicio}}</p></div>
-                        <div class="but-time"><p class="time">{{servico.escalas[3].servico.horaFim}}</p></div>
-                    </a></div>
-                    <div class="large-2 medium-2 hide-for-small-down columns day"><a href="#contact">
-                        <div class="but-name"><p class="name">{{servico.escalas[4].servico.tipoServico.nome}}</p></div>
-                        <div class="but-time"><p class="time">{{servico.escalas[4].servico.horaInicio}}</p></div>
-                        <div class="but-time"><p class="time">{{servico.escalas[4].servico.horaFim}}</p></div>
-                    </a></div>
-                    <div class="large-2 medium-2 hide-for-small-down columns day"><a href="#contact">
-                        <div class="but-name"><p class="name">{{servico.escalas[5].servico.tipoServico.nome}}</p></div>
-                        <div class="but-time"><p class="time">{{servico.escalas[5].servico.horaInicio}}</p></div>
-                        <div class="but-time"><p class="time">{{servico.escalas[5].servico.horaFim}}</p></div>
-                    </a></div>
-                    <div class="large-2 medium-2 hide-for-small-down columns day"><a href="#contact">
-                        <div class="but-name"><p class="name">{{servico.escalas[6].servico.tipoServico.nome}}</p></div>
-                        <div class="but-time"><p class="time">{{servico.escalas[6].servico.horaInicio}}</p></div>
-                        <div class="but-time"><p class="time">{{servico.escalas[6].servico.horaFim}}</p></div>
-                    </a></div>
+                    <div class="large-2 medium-2 small-4 columns day">
+                        <a  href="#contact" ng-show="servico.escalas[0].servico.tipoServico.nome != null" ng-style="servico.escalas[0].status != 1 && {'border-color': 'red'} ||
+                  servico.escalas[0].status == 1 && {'border-color': 'green'}">
+                            <div class="but-name"><p class="name">{{servico.escalas[0].servico.tipoServico.nome | limitTo: 5}}</p></div>
+                            <div class="but-time"><p class="time">{{servico.escalas[0].servico.horaInicio | limitTo: 5}}</p></div>
+                            <div class="but-time"><p class="time">{{servico.escalas[0].servico.horaFim | limitTo: 5}}</p></div>
+                        </a>
+                        <a class="btn-new-service" href="#contact" ng-show="servico.escalas[0].servico.tipoServico.nome == null">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <div class="large-2 medium-2 small-4 columns day">
+                        <a  href="#contact" ng-show="servico.escalas[1].servico.tipoServico.nome != null" ng-style="servico.escalas[1].status != 1 && {'border-color': 'red'} ||
+                  servico.escalas[1].status == 1 && {'border-color': 'green'}">
+                            <div class="but-name"><p class="name">{{servico.escalas[1].servico.tipoServico.nome | limitTo: 5}}</p></div>
+                            <div class="but-time"><p class="time">{{servico.escalas[1].servico.horaInicio | limitTo: 5}}</p></div>
+                            <div class="but-time"><p class="time">{{servico.escalas[1].servico.horaFim | limitTo: 5}}</p></div>
+                        </a>
+                        <a class="btn-new-service" href="#contact" ng-show="servico.escalas[1].servico.tipoServico.nome == null">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <div class="large-2 medium-2 small-3 columns day">
+                        <a  href="#contact" ng-show="servico.escalas[2].servico.tipoServico.nome != null" ng-style="servico.escalas[2].status != 1 && {'border-color': 'red'} ||
+                  servico.escalas[2].status == 1 && {'border-color': 'green'}">
+                            <div class="but-name"><p class="name">{{servico.escalas[2].servico.tipoServico.nome | limitTo: 5}}</p></div>
+                            <div class="but-time"><p class="time">{{servico.escalas[2].servico.horaInicio | limitTo: 5}}</p></div>
+                            <div class="but-time"><p class="time">{{servico.escalas[2].servico.horaFim | limitTo: 5}}</p></div>
+                        </a>
+                        <a class="btn-new-service" href="#contact" ng-show="servico.escalas[2].servico.tipoServico.nome == null">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <div class="large-2 medium-2 small-3 columns day">
+                        <a  href="#contact" ng-show="servico.escalas[3].servico.tipoServico.nome != null" ng-style="servico.escalas[3].status != 1 && {'border-color': 'red'} ||
+                  servico.escalas[3].status == 1 && {'border-color': 'green'}">
+                            <div class="but-name"><p class="name">{{servico.escalas[3].servico.tipoServico.nome | limitTo: 5}}</p></div>
+                            <div class="but-time"><p class="time">{{servico.escalas[3].servico.horaInicio | limitTo: 5}}</p></div>
+                            <div class="but-time"><p class="time">{{servico.escalas[3].servico.horaFim | limitTo: 5}}</p></div>
+                        </a>
+                        <a class="btn-new-service" href="#contact" ng-show="servico.escalas[3].servico.tipoServico.nome == null">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <div class="large-2 medium-2 hide-for-small-down columns day">
+                        <a  href="#contact" ng-show="servico.escalas[4].servico.tipoServico.nome != null" ng-style="servico.escalas[4].status != 1 && {'border-color': 'red'} ||
+                  servico.escalas[4].status == 1 && {'border-color': 'green'}">
+                            <div class="but-name"><p class="name">{{servico.escalas[4].servico.tipoServico.nome | limitTo: 5}}</p></div>
+                            <div class="but-time"><p class="time">{{servico.escalas[4].servico.horaInicio | limitTo: 5}}</p></div>
+                            <div class="but-time"><p class="time">{{servico.escalas[4].servico.horaFim | limitTo: 5}}</p></div>
+                        </a>
+                        <a class="btn-new-service" href="#contact" ng-show="servico.escalas[4].servico.tipoServico.nome == null">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <div class="large-2 medium-2 hide-for-small-down columns day">
+                        <a  href="#contact" ng-show="servico.escalas[5].servico.tipoServico.nome != null" ng-style="servico.escalas[5].status != 1 && {'border-color': 'red'} ||
+                  servico.escalas[5].status == 1 && {'border-color': 'green'}">
+                            <div class="but-name"><p class="name">{{servico.escalas[5].servico.tipoServico.nome | limitTo: 5}}</p></div>
+                            <div class="but-time"><p class="time">{{servico.escalas[5].servico.horaInicio | limitTo: 5}}</p></div>
+                            <div class="but-time"><p class="time">{{servico.escalas[5].servico.horaFim | limitTo: 5}}</p></div>
+                        </a>
+                        <a class="btn-new-service" href="#contact" ng-show="servico.escalas[5].servico.tipoServico.nome == null">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <div class="large-2 medium-2 hide-for-small-down columns day">
+                        <a  href="#contact" ng-show="servico.escalas[6].servico.tipoServico.nome != null" ng-style="servico.escalas[6].status != 1 && {'border-color': 'red'} ||
+                  servico.escalas[6].status == 1 && {'border-color': 'green'}">
+                            <div class="but-name"><p class="name">{{servico.escalas[6].servico.tipoServico.nome | limitTo: 5}}</p></div>
+                            <div class="but-time"><p class="time">{{servico.escalas[6].servico.horaInicio | limitTo: 5}}</p></div>
+                            <div class="but-time"><p class="time">{{servico.escalas[6].servico.horaFim | limitTo: 5}}</p></div>
+                        </a>
+                        <a class="btn-new-service" href="#contact" ng-show="servico.escalas[6].servico.tipoServico.nome == null">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="large-3 hide-for-medium-down columns list-table">
             <div class="container-list">
                 <div class="small-14 columns table-title">Tabela Prioridade</div>
-                <div class="small-7 columns choose-panel-l">
-                    <select id="select-servico">
-                        <option value="1">PO1</option>
-                        <option value="2">PO1</option>
-                        <option value="3">PO1</option>
-                        <option value="4">ATM</option>
+                <div class="small-5 columns choose-panel-l">
+                    <select id="select-servico" ng-model="tipoServicoId" ng-change="updateTipoServico()">
+                        <option value="{{tipoServico.id}}" ng-repeat="tipoServico in dataTipoServicos">{{tipoServico.prefixo}}</option>
                     </select>
                 </div>
-                <div class="small-7 columns choose-panel-r">
-                    <input type="text" class="date-table-list" value="03/05/2015" id="dp2">
-                    <div class="glyphicon-calendar-icon">
-                        <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-                    </div>
+                <div class="small-9 columns choose-panel-r">
+                      <input type="date" class="date-table-list" datepicker-popup ng-model="chooseDate" ng-change="changeWithDate(chooseDate)" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close"/>
                 </div>
                 <div class="small-14 columns divider-h"></div>
                 <div class="small-14 columns table-list">
                     <div class="small-7 columns choose-panel-l"><p class="title">Nome</p></div>
                     <div class="small-7 columns choose-panel-r"><p class="title">Ult. Data<p></div>
-                    <div class="small-14 columns row-list">
-                        <div class="small-7 columns"><p class="text-row-list">Rui</p></div>
-                        <div class="small-7 columns"><p class="text-row-list">12-05-2014</p></div>
-                    </div>
-                    <div class="small-14 columns row-list">
-                        <div class="small-7 columns"><p class="text-row-list">Rita</p></div>
-                        <div class="small-7 columns"><p class="text-row-list">12-05-2014</p></div>
-                    </div>
-                    <div class="small-14 columns row-list">
-                        <div class="small-7 columns"><p class="text-row-list">Francisco</p></div>
-                        <div class="small-7 columns"><p class="text-row-list">12-05-2014</p></div>
-                    </div>
-                    <div class="small-14 columns row-list">
-                        <div class="small-7 columns"><p class="text-row-list">Pedro</p></div>
-                        <div class="small-7 columns"><p class="text-row-list">12-05-2014</p></div>
-                    </div>
-                    <div class="small-14 columns row-list">
-                        <div class="small-7 columns"><p class="text-row-list">Maluco</p></div>
-                        <div class="small-7 columns"><p class="text-row-list">12-05-2014</p></div>
-                    </div>
-                    <div class="small-14 columns row-list">
-                        <div class="small-7 columns"><p class="text-row-list">Maluco</p></div>
-                        <div class="small-7 columns"><p class="text-row-list">12-05-2014</p></div>
-                    </div>
-                    <div class="small-14 columns row-list">
-                        <div class="small-7 columns"><p class="text-row-list">Maluco</p></div>
-                        <div class="small-7 columns"><p class="text-row-list">12-05-2014</p></div>
-                    </div>
-                    <div class="small-14 columns row-list">
-                        <div class="small-7 columns"><p class="text-row-list">Maluco</p></div>
-                        <div class="small-7 columns"><p class="text-row-list">12-05-2014</p></div>
-                    </div>
-                    <div class="small-14 columns row-list">
-                        <div class="small-7 columns"><p class="text-row-list">Maluco</p></div>
-                        <div class="small-7 columns"><p class="text-row-list">12-05-2014</p></div>
-                    </div>
-                    <div class="small-14 columns row-list">
-                        <div class="small-7 columns"><p class="text-row-list">Maluco</p></div>
-                        <div class="small-7 columns"><p class="text-row-list">12-05-2014</p></div>
+                    <div class="small-14 columns row-list" ng-repeat="person in dataTabelaPrioridade">
+                        <div class="small-7 columns"><p class="text-row-list">{{person.apelido}}</p></div>
+                        <div class="small-7 columns"><p class="text-row-list">{{person.date}}</p></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script>
-    $('#dp3').datepicker({
-        format: "yyyy-mm-dd",
-        autoclose: true,
-        language: "pt"
-    });
-    $('#dp3').datepicker('setDate', new Date());
-    $('#dp2').datepicker({
-        format: "yyyy-mm-dd",
-        autoclose: true,
-        language: "pt"
-    });
-    $("#dp2").datepicker('setDate', new Date());
-</script>

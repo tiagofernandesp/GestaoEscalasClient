@@ -1,0 +1,201 @@
+<div class="second-navbar-bg">
+	<nav class="row second-navbar">
+		<div class="large-11 medium-13 small-13 columns">
+			<div class="large-3 medium-3 small-4 columns">
+				<div class="large-10  medium-10 small-10 columns">
+
+					<p class="input-group">
+						<input type="date" class="date-second-navbar" datepicker-popup ng-model="chooseDate" ng-change="changeWithDate(chooseDate)" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+					</p>
+					<!--<input type="text" class="date-second-navbar" id="dp3">-->
+				</div>
+				<div class="large-4  medium-4 small-4 columns nextPrev">
+					<a ng-click="changeDate(-1)">
+						<span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+					</a>
+				</div>
+			</div>
+			<ul class="large-11 medium-11 small-10 columns nav-day">
+				<li class="large-2 medium-2 small-2 columns day" ng-repeat="dia in dias">
+					<a href="#contact">
+						<div class ="but-number-day"><p class="number-day">{{dia.data | date:'dd'}}</p></div>
+						<div class ="but-name-day"><p class="name-day">{{formatDateName(dia.data)}}</p></div>
+					</a>
+				</li>
+
+			</ul>
+		</div>
+		<div class="large-3 medium-1 small-1 columns next-search">
+			<div class="large-3 medium-14 small-14 columns nextPrev">
+				<a ng-click="changeDate(1)"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
+			</div>
+			<div class="large-11 hide-for-medium-down columns search">
+				<form class="form-search">
+					<div class="input-append">
+						<input type="text" class="span2 search-query" ng-model="searchText">
+						<div class="search-icon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</nav>
+</div>
+	<div class="row">
+		<div class="large-14 medium-14 small-14 columns container-table">
+			<table class="table">
+		      <thead>
+		        <tr>
+		          <th>Numero</th>
+		          <th>Servico</th>
+		          <th>Horário</th>
+		          <th>Viatura</th>
+		          <th>Titulo</th>
+		          <th>Observação</th>
+		          <th>Composição</th>
+		          <th><span class="glyphicon glyphicon-print" aria-hidden="true"></span></th>
+		        </tr>
+		      </thead>
+		      <tbody>
+		        <tr ng-repeat="(key, servico) in dataServicos">
+		          <th>{{servico.numero}}</th>
+		          <th>{{servico.tipoServico.prefixo}}</th>
+		          <th>{{servico.horaInicio | limitTo: 5}}/{{servico.horaFim| limitTo: 5}}</th>
+		          <th>{{servico.viatura.matricula}}</th>
+		          <th>{{servico.titulo| limitTo: 10}}</th>
+		          <th>{{servico.observacao | limitTo: 30}}</th>
+		          <th>{{servico.composicao | limitTo: 30}}</th>
+		          <th>
+		          	<a class="btn-edit-rem" ng-click="defineServico(key)" data-toggle="modal" data-target="#myModalServico"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+		          	<a class="btn-edit-rem" ng-click="defineServico(key)" data-toggle="modal" data-target="#myModalServico"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+		          </th>
+		        </tr>
+		      </tbody>
+		    </table>
+		    <a class="btn-new-servico" ng-click="startNewServico()" data-toggle="modal" data-target="#myModalServico"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Novo Serviço </a>
+		</div>
+	</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModalServico" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Atribuir Serviço</h4>
+            </div>
+
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="small-14 columns">
+                            <div class="small-4 columns"><p class="modal-name-person">Servico</p></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="small-14 columns">
+                            <div class="small-4 columns">
+                                <div class="small-7 columns">
+                                    <label for="modal-servico" class="right inline">Tip. Serviço: </label>
+                                </div>
+                                <div class="small-7 columns">
+                                    <select class="select-modal" id="modal-servico" ng-options="tServico.prefixo for tServico in dataTipoServicos" ng-model="selectedServico.tipoServico" ></select>
+                                </div>
+                            </div>
+                            <div class="small-5 columns">
+                                <div class="small-7 columns">
+                                    <label for="modal-numero" class="right inline">Numero: </label>
+                                </div>
+                                <div class="small-7 columns">
+                                    <input ng-model="selectedServico.numero" type="number" class="form-control" id="modal-numero">
+                                </div>
+                            </div>
+                            <div class="small-5 columns">
+                                <div class="small-7 columns">
+                                    <label for="modal-fRadio" class="right inline">Ind. Radio: </label>
+                                </div>
+                                <div class="small-7 columns">
+                                    <input ng-model="selectedServico.fRadio" type="text" class="form-control" id="modal-fRadio">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="small-14 columns">
+                            <div class="small-4 columns">
+                                <div class="small-7 columns">
+                                    <label for="modal-viatura" class="right inline">Viatura: </label>
+                                </div>
+                                <div class="small-7 columns">
+                                    <select class="select-modal" id="modal-viatura" ng-options="viatura.matricula for viatura in dataViaturas" ng-model="selectedServico.viatura" ></select>
+                                </div>
+                            </div>
+                            <div class="small-5 columns">
+                                <div class="small-7 columns">
+                                    <label for="modal-horaInicio" class="right inline">Hora Inicio: </label>
+                                </div>
+                                <div class="small-7 columns">
+                                    <input ng-model="selectedServico.horaInicio" type="text" class="form-control" id="modal-horaInicio">
+                                </div>
+                            </div>
+                            <div class="small-5 columns">
+                                <div class="small-7 columns">
+                                    <label for="modal-horaFim" class="right inline">Hora Fim: </label>
+                                </div>
+                                <div class="small-7 columns">
+                                    <input ng-model="selectedServico.horaFim" type="text" class="form-control" id="modal-horaFim">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="small-14 columns">
+                            <div class="small-2 columns">
+                                <label for="modal-composicao" class="right inline">Composição: </label>
+                            </div>
+                            <div class="small-12 columns">
+                                <input ng-model="selectedServico.composicao" type="text" class="form-control" id="modal-composicao">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="small-14 columns">
+                            <div class="small-2 columns">
+                                <label for="modal-titulo" class="right inline">Titulo: </label>
+                            </div>
+                            <div class="small-12 columns">
+                                <input ng-model="selectedServico.titulo" type="text" class="form-control" id="modal-titulo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="small-14 columns">
+                            <div class="small-2 columns">
+                                <label for="modal-itenerario" class="right inline">Itenerario: </label>
+                            </div>
+                            <div class="small-12 columns">
+                                <input ng-model="selectedServico.itenerario" type="text" class="form-control" id="modal-itenerario">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="small-14 columns">
+                            <div class="small-2 columns">
+                                <label for="modal-observacao" class="right inline">Observação: </label>
+                            </div>
+                            <div class="small-12 columns">
+                                <input ng-model="selectedServico.observacao" type="text" class="form-control" id="modal-observacao">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" ng-click="saveServico(selectedServico)" data-dismiss="modal">Gravar</button>
+            </div>
+        </div>
+    </div>
+</div>

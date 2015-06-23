@@ -2,7 +2,7 @@
 
 angular.module('App', [
 	'ngRoute',
-	'escalasModule',
+	'appControllers',
 	'servicosFactory'
     ])
 .config(function ($routeProvider) {
@@ -11,7 +11,13 @@ angular.module('App', [
     {
                 //templateUrl: 'app/views/teste.html',
                 templateUrl: 'app/views/panelEscalas.html',
-                controller: 'ListServicosController'
+                controller: 'panelEscalasController'
+            })
+    .when('/servicos',
+    {
+                //templateUrl: 'app/views/teste.html',
+                templateUrl: 'app/views/servicos.html',
+                controller: 'servicosController'
             })
     .otherwise({ redirectTo: '/escalas' });
 });

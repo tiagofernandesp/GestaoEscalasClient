@@ -5,192 +5,200 @@
                 <div class="large-10  medium-10 small-10 columns">
 
                     <p class="input-group">
-                      <input type="date" class="date-second-navbar" datepicker-popup ng-model="chooseDate" ng-change="changeWithDate(chooseDate)" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
-                  </p>
-                  <!--<input type="text" class="date-second-navbar" id="dp3">-->
-              </div>
-              <div class="large-4  medium-4 small-4 columns nextPrev">
-                <a ng-click="changeDate(-1)">
-                    <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-                </a>
+                        <input type="date" class="date-second-navbar" datepicker-popup ng-model="chooseDate" ng-change="changeWithDate(chooseDate)" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                    </p>
+                    <!--<input type="text" class="date-second-navbar" id="dp3">-->
+                </div>
+                <div class="large-4  medium-4 small-4 columns nextPrev">
+                    <a ng-click="changeDate(-1)">
+                        <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                    </a>
+                </div>
+            </div>
+            <ul class="large-11 medium-11 small-10 columns nav-day">
+                <li class="large-2 medium-2 small-2 columns day" ng-repeat="dia in dias">
+                    <a href="#contact">
+                        <div class ="but-number-day"><p class="number-day">{{dia.data | date:'dd'}}</p></div>
+                        <div class ="but-name-day"><p class="name-day">{{formatDateName(dia.data)}}</p></div>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+        <div class="large-3 medium-1 small-1 columns next-search">
+            <div class="large-3 medium-14 small-14 columns nextPrev">
+                <a ng-click="changeDate(1)"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
+            </div>
+            <div class="large-11 hide-for-medium-down columns search">
+                <form class="form-search">
+                    <div class="input-append">
+                        <input type="text" class="span2 search-query" ng-model="searchText">
+                        <div class="search-icon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
+                    </div>
+                </form>
             </div>
         </div>
-        <ul class="large-11 medium-11 small-10 columns nav-day">
-            <li class="large-2 medium-2 small-4 columns day">
-                <a href="#contact">
-                    <div class ="but-number-day"><p class="number-day">{{dias[0].data | date:'dd'}}</p></div>
-                    <div class ="but-name-day"><p class="name-day">{{formatDateName(dias[0].data)}}</p></div>
-                </a>
-            </li>
-
-            <li class="large-2 medium-2 small-4 columns day">
-                <a href="#contact">
-                    <div class ="but-number-day"><p class="number-day">{{dias[1].data | date:'dd'}}</p></div>
-                    <div class ="but-name-day"><p class="name-day">{{formatDateName(dias[1].data)}}</p></div>
-                </a>
-            </li>
-            <li class="large-2 medium-2 small-3 columns day">
-                <a href="#contact">
-                    <div class ="but-number-day"><p class="number-day">{{dias[2].data | date:'dd'}}</p></div>
-                    <div class ="but-name-day"><p class="name-day">{{formatDateName(dias[2].data)}}</p></div>
-                </a>
-            </li>
-            <li class="large-2 medium-2 small-3 columns day">
-                <a href="#contact">
-                    <div class ="but-number-day"><p class="number-day">{{dias[3].data | date:'dd'}}</p></div>
-                    <div class ="but-name-day"><p class="name-day">{{formatDateName(dias[3].data)}}</p></div>
-                </a>
-            </li>
-            <li class="large-2 medium-2 hide-for-small-down columns day">
-                <a href="#contact">
-                    <div class ="but-number-day"><p class="number-day">{{dias[4].data | date:'dd'}}</p></div>
-                    <div class ="but-name-day"><p class="name-day">{{formatDateName(dias[4].data)}}</p></div>
-                </a>
-            </li>
-            <li class="large-2 medium-2 hide-for-small-down columns day">
-                <a href="#contact">
-                    <div class ="but-number-day"><p class="number-day">{{dias[5].data | date:'dd'}}</p></div>
-                    <div class ="but-name-day"><p class="name-day">{{formatDateName(dias[5].data)}}</p></div>
-                </a>
-            </li>
-            <li class="large-2 medium-2 hide-for-small-down columns day">
-                <a href="#contact">
-                    <div class ="but-number-day"><p class="number-day">{{dias[6].data | date:'dd'}}</p></div>
-                    <div class ="but-name-day"><p class="name-day">{{formatDateName(dias[6].data)}}</p></div>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <div class="large-3 medium-1 small-1 columns next-search">
-        <div class="large-3 medium-14 small-14 columns nextPrev">
-            <a ng-click="changeDate(1)"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
-        </div>
-        <div class="large-11 hide-for-medium-down columns search">
-            <form class="form-search">
-                <div class="input-append">
-                    <input type="text" class="span2 search-query" ng-model="searchText">
-                    <div class="search-icon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
-                </div>
-            </form>
-        </div>
-    </div>
-</nav>
+    </nav>
 </div>
 
-<div class="body-background">
     <div class="row">
         <div class="large-11 medium-13 small-13 columns container-table">
-            <div class="small-14 columns person" ng-repeat="servico in dataListaEscalas | filter:searchText">
+            <div class="small-14 columns person" ng-repeat="(keyP, p) in dataListaEscalas | filter:searchText">
                 <div class="large-3 medium-3 small-4 columns name">
                     <div class="large-10  medium-14 small-14 columns apelido">
-                        <p class="p-apelido">{{servico.pessoa.apelido}}</p>
+                        <p class="p-apelido">{{p.pessoa.apelido}}</p>
                     </div>
                     <div class="large-4 hide-for-medium-down columns numero">
-                        <p class="p-numero">{{servico.pessoa.pNome}}</p>
-                        <p class="p-numero">{{servico.pessoa.numeroGNR}}</p>
+                        <p class="p-numero">{{p.pessoa.pNome}}</p>
+                        <p class="p-numero">{{p.pessoa.numeroGNR}}</p>
                     </div>
                 </div>
                 <div class="large-11 medium-11 small-10 columns">
-                    <div class="large-2 medium-2 small-4 columns day">
-                        <a  href="#contact" ng-show="servico.escalas[0].servico.tipoServico.nome != null" ng-style="servico.escalas[0].status != 1 && {'border-color': 'red'} ||
-                  servico.escalas[0].status == 1 && {'border-color': 'green'}">
-                            <div class="but-name"><p class="name">{{servico.escalas[0].servico.tipoServico.nome | limitTo: 5}}</p></div>
-                            <div class="but-time"><p class="time">{{servico.escalas[0].servico.horaInicio | limitTo: 5}}</p></div>
-                            <div class="but-time"><p class="time">{{servico.escalas[0].servico.horaFim | limitTo: 5}}</p></div>
+                    <div class="large-2 medium-2 small-2 columns day" ng-repeat="(keyS, s) in p.escalas" >
+                        <a class="btn-servico" ng-click="updateModal(keyS,keyP)" data-toggle="modal" data-target="#myModal" ng-show="s.servico.tipoServico != null" ng-style="s.status != 1 && {'border-color': 'red'} || s.status == 1 && {'border-color': 'green'}">
+                            <div class="but-name"><p class="name">{{s.servico.tipoServico.nome | limitTo: 5}}</p></div>
+                            <div class="but-time"><p class="time">{{s.servico.horaInicio | limitTo: 5}}</p></div>
+                            <div class="but-time"><p class="time">{{s.servico.horaFim | limitTo: 5}}</p></div>
                         </a>
-                        <a class="btn-new-service" href="#contact" ng-show="servico.escalas[0].servico.tipoServico.nome == null">
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                        </a>
-                    </div>
-                    <div class="large-2 medium-2 small-4 columns day">
-                        <a  href="#contact" ng-show="servico.escalas[1].servico.tipoServico.nome != null" ng-style="servico.escalas[1].status != 1 && {'border-color': 'red'} ||
-                  servico.escalas[1].status == 1 && {'border-color': 'green'}">
-                            <div class="but-name"><p class="name">{{servico.escalas[1].servico.tipoServico.nome | limitTo: 5}}</p></div>
-                            <div class="but-time"><p class="time">{{servico.escalas[1].servico.horaInicio | limitTo: 5}}</p></div>
-                            <div class="but-time"><p class="time">{{servico.escalas[1].servico.horaFim | limitTo: 5}}</p></div>
-                        </a>
-                        <a class="btn-new-service" href="#contact" ng-show="servico.escalas[1].servico.tipoServico.nome == null">
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                        </a>
-                    </div>
-                    <div class="large-2 medium-2 small-3 columns day">
-                        <a  href="#contact" ng-show="servico.escalas[2].servico.tipoServico.nome != null" ng-style="servico.escalas[2].status != 1 && {'border-color': 'red'} ||
-                  servico.escalas[2].status == 1 && {'border-color': 'green'}">
-                            <div class="but-name"><p class="name">{{servico.escalas[2].servico.tipoServico.nome | limitTo: 5}}</p></div>
-                            <div class="but-time"><p class="time">{{servico.escalas[2].servico.horaInicio | limitTo: 5}}</p></div>
-                            <div class="but-time"><p class="time">{{servico.escalas[2].servico.horaFim | limitTo: 5}}</p></div>
-                        </a>
-                        <a class="btn-new-service" href="#contact" ng-show="servico.escalas[2].servico.tipoServico.nome == null">
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                        </a>
-                    </div>
-                    <div class="large-2 medium-2 small-3 columns day">
-                        <a  href="#contact" ng-show="servico.escalas[3].servico.tipoServico.nome != null" ng-style="servico.escalas[3].status != 1 && {'border-color': 'red'} ||
-                  servico.escalas[3].status == 1 && {'border-color': 'green'}">
-                            <div class="but-name"><p class="name">{{servico.escalas[3].servico.tipoServico.nome | limitTo: 5}}</p></div>
-                            <div class="but-time"><p class="time">{{servico.escalas[3].servico.horaInicio | limitTo: 5}}</p></div>
-                            <div class="but-time"><p class="time">{{servico.escalas[3].servico.horaFim | limitTo: 5}}</p></div>
-                        </a>
-                        <a class="btn-new-service" href="#contact" ng-show="servico.escalas[3].servico.tipoServico.nome == null">
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                        </a>
-                    </div>
-                    <div class="large-2 medium-2 hide-for-small-down columns day">
-                        <a  href="#contact" ng-show="servico.escalas[4].servico.tipoServico.nome != null" ng-style="servico.escalas[4].status != 1 && {'border-color': 'red'} ||
-                  servico.escalas[4].status == 1 && {'border-color': 'green'}">
-                            <div class="but-name"><p class="name">{{servico.escalas[4].servico.tipoServico.nome | limitTo: 5}}</p></div>
-                            <div class="but-time"><p class="time">{{servico.escalas[4].servico.horaInicio | limitTo: 5}}</p></div>
-                            <div class="but-time"><p class="time">{{servico.escalas[4].servico.horaFim | limitTo: 5}}</p></div>
-                        </a>
-                        <a class="btn-new-service" href="#contact" ng-show="servico.escalas[4].servico.tipoServico.nome == null">
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                        </a>
-                    </div>
-                    <div class="large-2 medium-2 hide-for-small-down columns day">
-                        <a  href="#contact" ng-show="servico.escalas[5].servico.tipoServico.nome != null" ng-style="servico.escalas[5].status != 1 && {'border-color': 'red'} ||
-                  servico.escalas[5].status == 1 && {'border-color': 'green'}">
-                            <div class="but-name"><p class="name">{{servico.escalas[5].servico.tipoServico.nome | limitTo: 5}}</p></div>
-                            <div class="but-time"><p class="time">{{servico.escalas[5].servico.horaInicio | limitTo: 5}}</p></div>
-                            <div class="but-time"><p class="time">{{servico.escalas[5].servico.horaFim | limitTo: 5}}</p></div>
-                        </a>
-                        <a class="btn-new-service" href="#contact" ng-show="servico.escalas[5].servico.tipoServico.nome == null">
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                        </a>
-                    </div>
-                    <div class="large-2 medium-2 hide-for-small-down columns day">
-                        <a  href="#contact" ng-show="servico.escalas[6].servico.tipoServico.nome != null" ng-style="servico.escalas[6].status != 1 && {'border-color': 'red'} ||
-                  servico.escalas[6].status == 1 && {'border-color': 'green'}">
-                            <div class="but-name"><p class="name">{{servico.escalas[6].servico.tipoServico.nome | limitTo: 5}}</p></div>
-                            <div class="but-time"><p class="time">{{servico.escalas[6].servico.horaInicio | limitTo: 5}}</p></div>
-                            <div class="but-time"><p class="time">{{servico.escalas[6].servico.horaFim | limitTo: 5}}</p></div>
-                        </a>
-                        <a class="btn-new-service" href="#contact" ng-show="servico.escalas[6].servico.tipoServico.nome == null">
+                        <a class="btn-servico-no-border" ng-click="updateModal(keyS,keyP)" class="btn-new-service" data-toggle="modal" data-target="#myModal" ng-show="s.servico.tipoServico == null">
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="large-3 hide-for-medium-down columns list-table">
-            <div class="container-list">
-                <div class="small-14 columns table-title">Tabela Prioridade</div>
-                <div class="small-5 columns choose-panel-l">
-                    <select id="select-servico" ng-model="tipoServicoId" ng-change="updateTipoServico()">
-                        <option value="{{tipoServico.id}}" ng-repeat="tipoServico in dataTipoServicos">{{tipoServico.prefixo}}</option>
-                    </select>
-                </div>
-                <div class="small-9 columns choose-panel-r">
-                      <input type="date" class="date-table-list" datepicker-popup ng-model="chooseDate" ng-change="changeWithDate(chooseDate)" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close"/>
-                </div>
-                <div class="small-14 columns divider-h"></div>
-                <div class="small-14 columns table-list">
-                    <div class="small-7 columns choose-panel-l"><p class="title">Nome</p></div>
-                    <div class="small-7 columns choose-panel-r"><p class="title">Ult. Data<p></div>
-                    <div class="small-14 columns row-list" ng-repeat="person in dataTabelaPrioridade">
-                        <div class="small-7 columns"><p class="text-row-list">{{person.apelido}}</p></div>
-                        <div class="small-7 columns"><p class="text-row-list">{{person.date}}</p></div>
+<div class="large-3 hide-for-medium-down columns list-table">
+    <div class="container-list">
+        <div class="small-14 columns table-title">Tabela Prioridade</div>
+        <div class="small-5 columns choose-panel-l">
+            <select id="select-servico" ng-options="ts.prefixo for ts in dataTipoServicos" ng-model="selectedTipoServico" ng-change="updateTipoServico()">
+            </select>
+        </div>
+        <div class="small-9 columns choose-panel-r">
+            <input type="date" class="date-table-list" datepicker-popup ng-model="chooseDate" ng-change="changeWithDate(chooseDate)" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close"/>
+        </div>
+        <div class="small-14 columns divider-h"></div>
+        <div class="small-14 columns table-list">
+            <div class="small-7 columns choose-panel-l"><p class="title">Nome</p></div>
+            <div class="small-7 columns choose-panel-r"><p class="title">Ult. Data<p></div>
+            <div class="small-14 columns row-list" ng-repeat="person in dataTabelaPrioridade">
+                <div class="small-7 columns"><p class="text-row-list">{{person.apelido}}</p></div>
+                <div class="small-7 columns"><p class="text-row-list">{{person.date}}</p></div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- Modal Servico -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Atribuir Serviço</h4>
+            </div>
+
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="small-14 columns">
+                            <div class="small-4 columns"><p class="modal-name-person">{{selectedPerson.pessoa.numeroPosto}} - {{selectedPerson.pessoa.apelido}}</p></div>
+                        </div>
                     </div>
-                </div>
+                    <div class="row">
+                        <div class="small-14 columns">
+                            <div class="small-4 columns">
+                                <div class="small-7 columns">
+                                    <label for="modal-servico" class="right inline">Serviço: </label>
+                                </div>
+                                <div class="small-7 columns">
+                                    <select class="select-modal-bold" id="modal-servico" ng-options="s.tipoServico.prefixo for s in dataServicos" ng-model="selectedServico" ></select>
+                                </div>
+                            </div>
+                            <div class="small-5 columns">
+                                <div class="small-7 columns">
+                                    <label  class="right inline">Numero: </label>
+                                </div>
+                                <div class="small-7 columns">
+                                    <div class="output-container-modal">{{selectedServico.numero}}</div>
+                                </div>
+                            </div>
+                            <div class="small-5 columns">
+                                <div class="small-7 columns">
+                                    <label class="right inline">Ind. Radio: </label>
+                                </div>
+                                <div class="small-7 columns">
+                                    <div class="output-container-modal">{{selectedServico.fRadio}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="small-14 columns">
+                            <div class="small-4 columns">
+                                <div class="small-7 columns">
+                                    <label for="modal-viatura" class="right inline">Viatura: </label>
+                                </div>
+                                <div class="small-7 columns">
+                                    <div class="output-container-modal">{{selectedServico.viatura.matricula}}</div>
+                                </div>
+                            </div>
+                            <div class="small-5 columns">
+                                <div class="small-7 columns">
+                                    <label for="modal-hinicio" class="right inline">Hora Inicio: </label>
+                                </div>
+                                <div class="small-7 columns">
+                                    <div class="output-container-modal">{{selectedServico.horaInicio}}</div>
+                                </div>
+                            </div>
+                            <div class="small-5 columns">
+                                <div class="small-7 columns">
+                                    <label for="modal-hfim" class="right inline">Hora Fim: </label>
+                                </div>
+                                <div class="small-7 columns">
+                                    <div class="output-container-modal">{{selectedServico.horaFim}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="small-14 columns">
+                            <div class="small-2 columns">
+                                <label for="modal-composicao" class="right inline">Composição: </label>
+                            </div>
+                            <div class="small-12 columns">
+                                <div class="output-container-modal">{{selectedServico.composicao}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="small-14 columns">
+                            <div class="small-2 columns">
+                                <label for="modal-titulo" class="right inline">Titulo: </label>
+                            </div>
+                            <div class="small-12 columns">
+                                <div class="output-container-modal">{{selectedServico.titulo}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="small-14 columns">
+                            <div class="small-2 columns">
+                                <label for="modal-itenerario" class="right inline">Itenerario: </label>
+                            </div>
+                            <div class="small-12 columns">
+                                <div class="output-container-modal">{{selectedServico.itenerario}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" ng-click="saveServicoPessoa()" ng-show="selectedServico.id!=selectedServicoId && selectedServico.id!=null" data-dismiss="modal">Gravar</button>
             </div>
         </div>
     </div>

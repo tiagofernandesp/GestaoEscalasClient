@@ -40,6 +40,23 @@ angular.module('appControllers').controller('servicosController',['$scope','$htt
 		dat = yyyy+'-'+mm+'-'+dd;
 		return dat;
 	}
+	var formatTime = function(dat)
+	{
+
+		var h = dat.getHours();
+		var m = dat.getMinutes();
+
+		if(h<10) {
+			h='0'+h
+		}
+
+		if(m<10) {
+			m='0'+m
+		}
+
+		dat = h + ":" + m + ":00";
+		return dat;
+	}
 	$scope.changeDate= function(days)
 	{
 		var size = $scope.dias.length;
@@ -109,7 +126,6 @@ angular.module('appControllers').controller('servicosController',['$scope','$htt
 	getServiceServicoDate($scope.chooseDate);
 	getServiceViaturas();
 	getServiceTipoServicos();
-
 	$scope.defineServico= function(lineId)
 	{
 		$scope.selectedServico=angular.copy($scope.dataServicos[lineId]);
@@ -127,6 +143,15 @@ angular.module('appControllers').controller('servicosController',['$scope','$htt
 				i=0;
 			}
 		};
+		$scope.selectedServico.newDataInic="";
+		$scope.selectedServico.newDataFim="";
+		var s = $scope.selectedServico.dataInicio + " " + $scope.selectedServico.horaInicio;
+		var bits = s.split(/\D/);
+		$scope.selectedServico.newDataInic = new Date(bits[0], --bits[1], bits[2], bits[3], bits[4]);
+
+		var s = $scope.selectedServico.dataFim + " " + $scope.selectedServico.horaFim;
+		var bits = s.split(/\D/);
+		$scope.selectedServico.newDataFim = new Date(bits[0], --bits[1], bits[2], bits[3], bits[4]);
 	}
 
 	$scope.saveServico=function(servico){
@@ -137,9 +162,26 @@ angular.module('appControllers').controller('servicosController',['$scope','$htt
 	}
 
 	$scope.startNewServico=function(){
-		$scope.selectedServico="";
+		$scope.selectedServico={data:''};
 	}
-	
+	$scope.updateDateIniFim=function(){
+		$scope.selectedServico.newDataInic="";
+		$scope.selectedServico.newDataFim="";
+		$scope.selectedServico.newDataInic=angular.copy($scope.chooseDate);
+		$scope.selectedServico.newDataInic.setHours(0,0,0,0);
+		$scope.selectedServico.newDataFim=angular.copy($scope.chooseDate);
+		$scope.selectedServico.newDataFim.setHours(0,0,0,0);
+		$scope.selectedServico.newDataInic.setSeconds(60*60*$scope.selectedServico.tipoServico.horaInicio);
+		$scope.selectedServico.newDataFim.setSeconds(60*60*$scope.selectedServico.tipoServico.horaFim);
+		$scope.selectedServico.dataInicio=formatDate($scope.selectedServico.newDataInic);
+		$scope.selectedServico.horaInicio=formatTime($scope.selectedServico.newDataInic);
+		$scope.selectedServico.dataFim=formatDate($scope.selectedServico.newDataFim);
+		$scope.selectedServico.horaFim=formatTime($scope.selectedServico.newDataFim);
+		$scope.selectedServico.data=formatDate($scope.chooseDate);
+	}
+	$scope.removeServico = function(){
+		deleteServico($scope.selectedServico);
+	}
 	function addServico(servico){
 		dataFactory.postServico(servico)
 		.success(function (data, status) {
@@ -151,6 +193,15 @@ angular.module('appControllers').controller('servicosController',['$scope','$htt
 	}
 	function editServico(servico){
 		dataFactory.putServico(servico)
+		.success(function (data, status) {
+			getServiceServicoDate($scope.chooseDate);
+		})
+		.error(function (data, status) {
+			alert("Erro aceder Servidor. " + "Status: "+ status);
+		});
+	}
+	function deleteServico(servico){
+		dataFactory.deleteServico(servico)
 		.success(function (data, status) {
 			getServiceServicoDate($scope.chooseDate);
 		})

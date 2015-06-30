@@ -34,3 +34,14 @@ ORDER BY Data ASC;
 	ON P.Id=N.Pessoa_Id
 	where Ativo = '1'
 ORDER BY Data ASC;
+
+SELECT * FROM gestaoescalas.pessoa AS P
+	INNER JOIN (SELECT HS.Pessoa_Id, S.Data FROM gestaoescalas.HabilitaServico AS HS
+		LEFT JOIN (SELECT max(Data) as Data , Pessoa_Id , Servico_Id FROM gestaoescalas.ServicoPessoa AS G 
+			INNER JOIN ( SELECT Id FROM gestaoescalas.Servico WHERE TipoServico_Id = '1' ) AS SE ON SE.Id=G.Servico_Id
+				WHERE Data < '2015-07-22' GROUP BY Pessoa_Id) AS S
+                ON S.Pessoa_Id = HS.Pessoa_Id
+		where HS.TipoServico_Id = '1') AS N
+	ON P.Id=N.Pessoa_Id
+	where Ativo = '1'
+ORDER BY Data ASC;

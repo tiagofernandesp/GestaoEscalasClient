@@ -155,6 +155,10 @@ angular.module('appControllers').controller('servicosController',['$scope','$htt
 	}
 
 	$scope.saveServico=function(servico){
+		$scope.selectedServico.dataInicio=formatDate($scope.selectedServico.newDataInic);
+		$scope.selectedServico.horaInicio=formatTime($scope.selectedServico.newDataInic);
+		$scope.selectedServico.dataFim=formatDate($scope.selectedServico.newDataFim);
+		$scope.selectedServico.horaFim=formatTime($scope.selectedServico.newDataFim);
 		if ($scope.selectedServico.id!=null) {
 			editServico(servico);
 		}

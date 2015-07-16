@@ -45,3 +45,11 @@ SELECT * FROM gestaoescalas.pessoa AS P
 	ON P.Id=N.Pessoa_Id
 	where Ativo = '1'
 ORDER BY Data ASC;
+
+SELECT * FROM gestaoescalas.pessoa AS P
+		LEFT JOIN (SELECT max(Data) as Data , Pessoa_Id , Gratificado_Id FROM gestaoescalas.GratificadoPessoa AS G 
+			INNER JOIN ( SELECT Id FROM gestaoescalas.Gratificado WHERE TipoGratificado_Id = '2' ) AS SE ON SE.Id=G.Gratificado_Id
+				WHERE Data < '2015-07-22' GROUP BY Pessoa_Id) AS S
+	ON P.Id=S.Pessoa_Id
+	where Ativo = '1'
+ORDER BY Data ASC;

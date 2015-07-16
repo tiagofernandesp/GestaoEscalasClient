@@ -1,0 +1,119 @@
+<div class="second-navbar-bg">
+    <nav class="row second-navbar">
+        <div class="large-11 medium-13 small-13 columns">
+            <div class="large-3 medium-3 small-4 columns">
+                <div class="large-10  medium-10 small-10 columns">
+
+                    <p class="input-group">
+                        <input type="date" class="date-second-navbar" datepicker-popup ng-model="chooseDate" ng-change="changeWithDate(chooseDate)" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                    </p>
+                    <!--<input type="text" class="date-second-navbar" id="dp3">-->
+                </div>
+                <div class="large-4  medium-4 small-4 columns nextPrev">
+                    <a ng-click="changeDate(-1)">
+                        <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                    </a>
+                </div>
+            </div>
+            <ul class="large-11 medium-11 small-10 columns nav-day">
+                <li class="large-2 medium-2 small-2 columns day" ng-repeat="(keyD, dia) in dias">
+                    <a ng-click="changeDate(keyD)">
+                        <div class ="but-number-day"><p class="number-day">{{dia.data | date:'dd'}}</p></div>
+                        <div class ="but-name-day"><p class="name-day">{{formatDateName(dia.data)}}</p></div>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+        <div class="large-3 medium-1 small-1 columns next-search">
+            <div class="large-3 medium-14 small-14 columns nextPrev">
+                <a ng-click="changeDate(1)"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
+            </div>
+            <div class="large-11 hide-for-medium-down columns search">
+                <form class="form-search">
+                    <div class="input-append">
+                        <input type="text" class="span2 search-query" ng-model="searchText">
+                        <div class="search-icon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<div class="row">
+    <div class="doc-container">
+        <div class="doc-A4" id="content">
+            <div class="doc-cabecalho">
+                <div class="doc-logo">logo</div>
+                <div class="doc-nome-data">
+
+                    <p class="titulos-bold">POSTO TERRITORIAL DE RIBA DE AVE</p>
+                </div>
+                <div class="doc-nome-comandante">
+                    <p class="titulos-bold">O comandate</p>
+                    <div class="doc-assinatura" ></div>
+                    <p class="italic">{{nomeComandante}}</p></div>
+                    <div class="doc-nome-data">
+                        <p class="titulos-bold">ESCALA DE SERVIÇO</p>
+                        <p>{{getNumberDay(chooseDate)}} de {{formatDateNameMonth(chooseDate)}} de {{getNumberYear(chooseDate)}} {{formatDateName(chooseDate)}} </p></div>
+                    </div>
+                    <div class="doc-servicos">
+                        <div class="doc-servico" ng-repeat="tServico in dataTipoServicos">
+                            <div class="doc-nome-servico">{{tServico.nome}}:</div>
+                            <div class="doc-prefixo-servico">{{tServico.prefixo}}</div>
+                        </div>
+                    </div>
+                    <div class="doc-efetivos">
+                        <div class="doc-efetivo"><span class="tabela-titulos-bold">EFETIVOS</span></div>
+                        <div class="doc-efetivo" ng-repeat="sp in dataServicosPessoa">{{sp.pessoa.numeroGNR}}</div>
+                    </div>
+                    <div class="doc-grupo-servico-titulos">
+                        <div class="doc-n"><span class="tabela-titulos-bold">Nº</span></div>
+                        <div class="doc-horario"><span class="tabela-titulos-bold">Horário</span></div>
+                        <div class="doc-composicao"><span class="tabela-titulos-bold">Composiçao</span></div>
+                        <div class="doc-giro"><span class="tabela-titulos-bold">Giro/Missão/Itenerario</span></div>
+                        <div class="doc-veiculo"><span class="tabela-titulos-bold">Veiculo</span></div>
+                        <div class="doc-radio"><span class="tabela-titulos-bold">Ind. Radio</span></div>
+                    </div>
+                    <div class="doc-grupo-servico" ng-repeat="servico in dataServicos">
+                        <div class="doc-n"><span class="tabela-text" >{{servico.numero}}</span></div>
+                        <div class="doc-horario"><span class="tabela-text" >({{servico.horaInicio| limitTo: 5}}/{{servico.horaFim| limitTo: 5}})</span></div>
+                        <div class="doc-composicao"><span class="tabela-text" >{{servico.composicao}}</span></div>
+                        <div class="doc-giro"><span class="tabela-text">{{servico.itenerario}}
+                        </span>
+                    </div>
+                    <div class="doc-veiculo"><span class="tabela-text" >{{servico.viatura.matricula}}</span></div>
+                    <div class="doc-radio"><span class="tabela-text" >{{servico.fRadio}}</span></div>
+                </div>
+                <div class="doc-grupo-servico-nota">Nota: {{nota}}</div>
+            </div>
+            <div class="doc-right-panel">
+            <div class="doc-configuracoes-header">Configuração PDF</div>
+                <div class="row">
+                    <div class="small-12 columns">
+                        <div class="small-4 columns">
+                        <label for="modal-nomeComandante" class="right inline">Nome Comandante: </label>
+                        </div>
+                        <div class="small-5 columns">
+                            <input ng-model="nomeComandante" type="text" class="form-control" id="modal-nomeComandante">
+                        </div>
+                        <div class="small-5 columns"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="small-12 columns">
+                        <div class="small-4 columns">
+                            <label for="modal-nota" class="right inline">Nota: </label>
+                        </div>
+                        <div class="small-10 columns">
+                            <textarea rows="2" cols="50" ng-model="nota" type="text" id="modal-nota"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="doc-btn-download"><button type="button" ng-click="printPDF() "class="btn btn-primary">Download Pdf</button></div>
+            </div>
+        </div>
+    </div>
+</div>
+

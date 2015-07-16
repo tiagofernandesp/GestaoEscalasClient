@@ -45,6 +45,9 @@ p.name-day {
   padding:0;
   margin: 0;
 }
+.warning-color{
+  color: orange;
+}
 p.number-day {
   font-size: 15px;
   position: relative;
@@ -306,6 +309,7 @@ a.btn-new-service{
   font-size: 18px;
   font-weight: bold;
   color: #00510D;
+  padding-top: 10px;
 }
 .container-list .choose-panel-l{
   display: inline;
@@ -378,8 +382,9 @@ input.date-table-list{
   margin-bottom: 4%;
 
 }
-.choose-panel-l .title, .choose-panel-r .title{
-  font-size: 13px;
+.table-prioridade .title{
+  font-size: 14px;
+  line-height: 24px;
   color: black;
   text-align: center;
   font-weight: bold;
@@ -392,7 +397,15 @@ input.date-table-list{
   text-align: center;
   margin: 0;
   padding: 0;
-  line-height: 18px;
+}
+.table-prioridade{
+  width: 100%;
+}
+.table-prioridade>tbody>tr>td, .table-prioridade>tbody>tr>th, .table-prioridade>tfoot>tr>td, .table-prioridade>tfoot>tr>th, .table-prioridade>thead>tr>td, .table-prioridade>thead>tr>th {
+  padding: 4px;
+  line-height: 1.42857143;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
 }
 /*
 *Modal
@@ -474,6 +487,11 @@ p.modal-name-person{
   font-weight: bold;
   text-align: right;
 }
+p.modal-servicoPessoa-error{
+  text-align: center;
+  color: orange;
+  font-size: 12px;
+}
 a.btn-edit-rem{
   position: relative;
   display: inline-block;
@@ -481,7 +499,19 @@ a.btn-edit-rem{
   border: 0;
   padding-left: 5px;
   padding-right: 5px;
-  color: #4F4F4F;
+  color: #45A16B;
+  text-decoration: none;
+
+}
+a.btn-imprimir{
+  position: relative;
+  display: inline-block;
+  float: left;
+  border: 0;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #45A16B;
+  text-decoration: none;
 }
 a.btn-new-servico {
   position: relative;
@@ -514,4 +544,284 @@ input[type="file"], input[type="checkbox"], input[type="radio"], select {
 
 .btn-second-nav{
   line-height: 38px;
+}
+
+input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="week"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], input[type="color"], textarea {
+  margin: 0px;
+}
+.dropdown-text {
+  font-size: 12px;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #597966;
+  border-color: #00510D;
+}
+.btn-primary:hover{
+  color: #fff;
+  background-color: #00510D;
+  border-color: #00510D;
+}
+.input-group {
+  margin: 5px;
+}
+/*
+*  Doc serviços
+*/
+.doc-A4{
+  position: relative;
+  float: left;
+  display: inline;
+  height: 1120px;
+  width: 790px;
+  background-color: white;
+  text-align: center;
+  font-size: 12px;
+  font-family: Calibri;
+  padding: 15px;
+  margin: 0 auto;
+  -webkit-box-shadow: 0px 0px 6px 0px rgba(50, 50, 50, 0.51);
+-moz-box-shadow:    0px 0px 6px 0px rgba(50, 50, 50, 0.51);
+box-shadow:         0px 0px 6px 0px rgba(50, 50, 50, 0.51);
+}
+.doc-right-panel{
+  position: relative;
+  float: left;
+  display: inline;
+  background-color: rgb(216, 216, 216);
+  width: 790px;
+  padding-bottom: 15px;
+  margin-top: 15px;
+    -webkit-box-shadow: 0px 0px 6px 0px rgba(50, 50, 50, 0.51);
+-moz-box-shadow:    0px 0px 6px 0px rgba(50, 50, 50, 0.51);
+box-shadow:         0px 0px 6px 0px rgba(50, 50, 50, 0.51);
+}
+.doc-container{
+  position: relative;
+  float: left;
+  display: inline;
+  width: 100%;
+  margin-top: 15px;
+}
+p.titulos-bold{
+  font-size: 18px;
+  font-weight: bold;
+}
+.tabela-titulos-bold{
+  font-size: 12px;
+  font-weight: bold;
+  position: relative;
+  top: 25%;
+  transform: translateY(-50%);
+}
+.tabela-text{
+  font-size: 12px;
+  position: relative;
+  display: block;
+  top: 60%;
+  transform: translateY(-50%);
+  white-space: pre-wrap;
+}
+p.italic{
+  font-weight: italic;
+}
+.doc-logo{
+  position: relative;
+  float: left;
+  display: inline-block;
+  height: 100%;
+  width: 20%;
+}
+.doc-nome-data{
+  position: relative;
+  float: left;
+  display: inline;
+  height: 50%;
+  width: 60%;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 15px;
+}
+.doc-nome-comandante{
+  position: relative;
+  float: right;
+  display: inline-block;
+  height: 100%;
+  width: 20%;
+  padding: 15px;
+}
+.doc-assinatura{
+  height: 50%;
+  width: 100%;
+  border: 1px dashed;
+}
+.doc-cabecalho{
+  position: relative;
+  float: left;
+  display: inline;
+  height: 11%;
+  width: 100%;
+
+}
+.doc-servicos{
+  position: relative;
+  float: left;
+  display: inline;
+  height: 12%;
+  width: 100%;
+  padding: 20px;
+}
+.doc-servico{
+  position: relative;
+  float: left;
+  display: inline-block;
+  height: 20%;
+  width: 20%
+
+}
+.doc-nome-servico{
+  position: relative;
+  float: left;
+  display: inline-block;
+  height: 100%;
+  width: 70%;
+  text-align: right;
+  padding-right: 5px;
+}
+.doc-prefixo-servico{
+  position: relative;
+  float: left;
+  display: inline-block;
+  height: 100%;
+  width: 30%;
+  border: 1px solid;
+  border-collapse: collapse;
+}
+.doc-efetivos{
+  position: relative;
+  float: left;
+  display: inline;
+  height: 73%;
+  width: 7%;
+  border: 1px solid;
+  border-bottom: 0;
+  border-collapse: collapse;
+
+}
+.doc-efetivo{
+  position: relative;
+  float: left;
+  display: inline;
+  height: 3%;
+  width: 100%;
+  border-bottom: 1px solid;
+  border-collapse: collapse;
+}
+.doc-grupo-servico{
+  position: relative;
+  float: left;
+  display: inline-block;
+  height: 7%;
+  width: 93%;
+  overflow: hidden;
+
+}
+.doc-grupo-servico-titulos{
+  position: relative;
+  float: left;
+  display: inline-block;
+  height: 3%;
+  width: 93%;
+  border-top: 1px solid;
+}
+.doc-grupo-servico-nota{
+  position: relative;
+  float: left;
+  display: inline;
+  height: 4%;
+  width: 100%;
+  border: 1px solid;
+  text-align: left;
+  padding:0px 5px 0px 5px;
+}
+.doc-n{
+  position: relative;
+  float: left;
+  display: inline-block;
+  width: 5%;
+  height: 100%;
+  border-bottom: 1px solid;
+  border-right: 1px solid;
+}
+.doc-horario{
+  position: relative;
+  float: left;
+  display: inline-block;
+  width: 10%;
+  height: 100%;
+  border-bottom: 1px solid;
+  border-right: 1px solid;
+}
+.doc-composicao{
+  position: relative;
+  float: left;
+  display: inline-block;
+  width: 15%;
+  height: 100%;
+  border-bottom: 1px solid;
+  border-right: 1px solid;
+}
+.doc-giro{
+  position: relative;
+  float: left;
+  display: inline-block;
+  width: 55%;
+  height: 100%;
+  border-bottom: 1px solid;
+  border-right: 1px solid;
+}
+.doc-veiculo{
+  position: relative;
+  float: left;
+  display: inline-block;
+  width: 7%;
+  height: 100%;
+  border-bottom: 1px solid;
+  border-right: 1px solid;
+}
+.doc-radio{
+  position: relative;
+  float: left;
+  display: inline-block;
+  width: 8%;
+  height: 100%;
+  border-bottom: 1px solid;
+  border-right: 1px solid;
+}
+.doc-A4 p {
+  line-height: 1;
+  margin-bottom: 0;
+  font-family: Calibri;
+}
+.doc-btn-download{
+  position: relative;
+  display: inline;
+  float: left;
+  margin-top: 25px;
+  margin-left: 575px;
+}
+.doc-configuracoes-header{
+  position: relative;
+  display: inline;
+  float: left;
+  width: 100%;
+  height: 30px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 15px;
+  background-color: rgb(0, 81, 13);
+  margin-bottom: 15px;
+  color: white;
+  line-height: 30px;
 }

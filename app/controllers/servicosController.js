@@ -1,11 +1,15 @@
 'use strict';
 
-angular.module('appControllers').controller('servicosController',['$scope','$http','$rootScope','dataFactory','$controller', function($scope,$http,$rootScope,dataFactory,$controller) {
-/*
+angular.module('appControllers').controller('servicosController',['$scope','$http','$rootScope','dataFactory','$controller','sharedProperties', function($scope,$http,$rootScope,dataFactory,$controller,sharedProperties) {
+	/*
 	* Tabela
 	*/
-	var today = new Date();
-	$scope.chooseDate = today;
+	$scope.chooseDate=sharedProperties.getChooseDate();
+
+	var updateChooseDate  = function(date){
+		$scope.chooseDate=date;
+		sharedProperties.setChooseDate(date);
+	}
 
 	var addDays = function( days)
 	{
@@ -60,20 +64,14 @@ angular.module('appControllers').controller('servicosController',['$scope','$htt
 	$scope.changeDate= function(days)
 	{
 		var size = $scope.dias.length;
-		$scope.chooseDate = addDays(days, $scope.chooseDate);
-		if(days === -1) {
-			$scope.dias.unshift({data: addDays(days, $scope.dias[0].data)});
-			$scope.dias.pop();
-		} else {
-			$scope.dias.push({data: addDays(days, $scope.dias[size-1].data)});	
-			$scope.dias.shift();
-		}
+		updateChooseDate(addDays(days));
+		initializeArrayDays($scope.chooseDate);
 		getServiceServicoDate($scope.chooseDate);
 	}
 	$scope.changeWithDate= function(dt)
 	{
 		var size = $scope.dias.length;
-		$scope.chooseDate = dt;
+		updateChooseDate(dt);
 		initializeArrayDays(dt);
 		getServiceServicoDate($scope.chooseDate);
 	}

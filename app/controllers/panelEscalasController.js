@@ -1,13 +1,15 @@
 'use strict';
 
-angular.module('appControllers', []).controller('panelEscalasController',['$scope','$http','$rootScope','dataFactory', function($scope,$http,$rootScope,dataFactory) {
-
-	
+angular.module('appControllers').controller('panelEscalasController',['$scope','$http','$rootScope','dataFactory','sharedProperties', function($scope,$http,$rootScope,dataFactory,sharedProperties) {
 	/*
 	* Tabela
 	*/
-	var today = new Date();
-	$scope.chooseDate = today;
+	$scope.chooseDate=sharedProperties.getChooseDate();
+
+	var updateChooseDate  = function(date){
+		$scope.chooseDate=date;
+		sharedProperties.setChooseDate(date);
+	}
 
 	var addDays = function( days)
 	{
@@ -42,7 +44,6 @@ angular.module('appControllers', []).controller('panelEscalasController',['$scop
 		dat = yyyy+'-'+mm+'-'+dd;
 		return dat;
 	}
-
 	function getServiceEscalas(dat){
 		dataFactory.getEscalas(formatDate(dat))
 		.success(function (data, status) {
@@ -52,26 +53,31 @@ angular.module('appControllers', []).controller('panelEscalasController',['$scop
 			alert("Erro aceder Servidor. " + "Status: "+ status);
 		});
 	}
+	function getTabelaServicosMinimos(dat){
+		dataFactory.getTabelaServicosMinimos(formatDate(dat))
+		.success(function (data, status) {
+			$scope.dataListaServicosMinimos = data;
+			constructStringWarning();
+		})
+		.error(function (data, status) {
+			alert("Erro aceder Servidor. " + "Status: "+ status);
+		});
+	}
 	$scope.changeDate= function(days)
 	{
 		var size = $scope.dias.length;
-		$scope.chooseDate = addDays(days, $scope.chooseDate);
-		if(days === -1) {
-			$scope.dias.unshift({data: addDays(days, $scope.dias[0].data)});
-			$scope.dias.pop();
-		} else {
-			$scope.dias.push({data: addDays(days, $scope.dias[size-1].data)});	
-			$scope.dias.shift();
-		}
+		updateChooseDate(addDays(days));
+		initializeArrayDays($scope.chooseDate);
 		getServiceEscalas($scope.chooseDate);
+		getTabelaServicosMinimos($scope.chooseDate);
 		getTabelaPrioridade();
 	}
 	$scope.changeWithDate= function(dt)
 	{
-		var size = $scope.dias.length;
-		$scope.chooseDate = dt;
+		updateChooseDate(dt);
 		initializeArrayDays(dt);
 		getServiceEscalas($scope.chooseDate);
+		getTabelaServicosMinimos($scope.chooseDate);
 		getTabelaPrioridade();
 	}
 
@@ -89,7 +95,26 @@ angular.module('appControllers', []).controller('panelEscalasController',['$scop
 	}
 
 	getServiceEscalas($scope.chooseDate);
+	getTabelaServicosMinimos($scope.chooseDate);
 	initializeArrayDays($scope.chooseDate);
+	function constructStringWarning(){
+		var str = "";
+		$scope.stringWarning = new Array(7);
+		var lenLin = $scope.dataListaServicosMinimos.length;
+		for(var i=0;i<lenLin;i++){
+			$scope.stringWarning[i] = "";
+			var lenCol = $scope.dataListaServicosMinimos[i].length;
+			for(var j=0;j<lenCol;j++){
+				$scope.stringWarning[i] = $scope.stringWarning[i] + $scope.dataListaServicosMinimos[i][j].nome;
+				if(j+1!=lenCol){
+					$scope.stringWarning[i] = $scope.stringWarning[i] + ", ";
+				}
+				else{
+					$scope.stringWarning[i] = $scope.stringWarning[i] + ".";
+				}
+			}
+		}
+	}
 	/*
 	* Lista Proridades
 	*/
@@ -146,23 +171,24 @@ angular.module('appControllers', []).controller('panelEscalasController',['$scop
 	$scope.selectedPerson="";
 	$scope.selectedServicoId="";
 	$scope.selectedDate="";
-	$scope.selectedServicoPessoaId="";
+	$scope.selectedServicoPessoa="";
 	$scope.updateModal = function(nDays,linePerson){
 		$scope.selectedServico="";
 		$scope.selectedServicoId="";
-		$scope.selectedServicoPessoaId="";
+		$scope.selectedServicoPessoa="";
 		$scope.selectedDate=addDays(nDays);
 		getServiceServicoDate($scope.selectedDate);
 		$scope.selectedPerson=$scope.dataListaEscalas[linePerson];
 		if($scope.dataListaEscalas[linePerson].escalas[nDays].servico!=null){
 			$scope.selectedServicoId=$scope.dataListaEscalas[linePerson].escalas[nDays].servico.id;
-			$scope.selectedServicoPessoaId=$scope.dataListaEscalas[linePerson].escalas[nDays].id;
+			$scope.selectedServicoPessoa=$scope.dataListaEscalas[linePerson].escalas[nDays];
 		}
 	}
 	function postServicoPessoa (objServicoPessoa){
 		dataFactory.postServicoPessoa(objServicoPessoa)
 		.success(function (data, status) {
 			getServiceEscalas($scope.chooseDate);
+			getTabelaServicosMinimos($scope.chooseDate);
 		})
 		.error(function (data, status) {
 			alert("Erro aceder Servidor. " + "Status: "+ status);
@@ -172,6 +198,7 @@ angular.module('appControllers', []).controller('panelEscalasController',['$scop
 		dataFactory.putServicoPessoa(objServicoPessoa)
 		.success(function (data, status) {
 			getServiceEscalas($scope.chooseDate);
+			getTabelaServicosMinimos($scope.chooseDate);
 		})
 		.error(function (data, status) {
 			alert("Erro aceder Servidor. " + "Status: "+ status);
@@ -180,18 +207,18 @@ angular.module('appControllers', []).controller('panelEscalasController',['$scop
 	$scope.saveServicoPessoa = function(){
 		var objServicoPessoa = 
 		{
-			"id":$scope.selectedServicoPessoaId,
+			"id":$scope.selectedServicoPessoa.id,
 			"servico":{"id":$scope.selectedServico.id},
 			"pessoa":{"id":$scope.selectedPerson.pessoa.id},
 			"erro":"",
 			"data":$scope.selectedDate,
 			"status":1
 		};
-		if(objServicoPessoa.id==""){
-			postServicoPessoa (objServicoPessoa);
+		if(objServicoPessoa.id>=0){
+			putServicoPessoa (objServicoPessoa);
 		}
 		else{
-			putServicoPessoa (objServicoPessoa);
+			postServicoPessoa (objServicoPessoa);
 		}
 	}
 }]);
